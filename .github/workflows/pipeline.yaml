@@ -24,6 +24,11 @@ jobs:
       - name: Deploy to Dev
         run: |
           echo "🚀 Desplegando en el entorno dev..."
+          echo "📂 Directorio actual: $(pwd)"
+          echo "📁 Contenido del directorio:"
+          ls -la
+          echo "🔍 Verificando estructura de environments:"
+          ls -la environments/ || echo "❌ No existe el directorio environments"
           kubectl apply -k environments/dev
       
       - name: Wait for rollout
@@ -56,6 +61,8 @@ jobs:
       - name: Deploy to Staging
         run: |
           echo "🚀 Desplegando en el entorno staging..."
+          echo "📂 Directorio actual: $(pwd)"
+          ls -la environments/ || echo "❌ No existe el directorio environments"
           kubectl apply -k environments/staging
       
       - name: Wait for rollout
@@ -88,6 +95,8 @@ jobs:
       - name: Deploy to Production
         run: |
           echo "🚀 Desplegando en el entorno de producción..."
+          echo "📂 Directorio actual: $(pwd)"
+          ls -la environments/ || echo "❌ No existe el directorio environments"
           kubectl apply -k environments/prod
       
       - name: Wait for rollout
